@@ -3,10 +3,13 @@
 
 #include <stdio.h>
 
-int main(int argc, char **argv)
+int main( )
 {
-	printf("Hello world!\n");
-	
+	int a,b,c;
+	//printf ("Введите 3 числа:\n");
+	scanf ("%d%d%d", &a, &b, &c);
+	//x=a+b+c;
+	printf ("%d+%d+%d=%d\n",a, b, c, a+b+c);
+	printf ("%d*%d*%d=%d\n",a, b, c, a*b*c);
 	return 0;
 }
-
