@@ -1,6 +1,7 @@
 
 
 
+
 #include <stdio.h>
 
 int main( )
@@ -10,6 +11,6 @@ int main( )
 	scanf ("%d%d%d", &a, &b, &c);
 	//x=a+b+c;
 	printf ("%d+%d+%d=%d\n",a, b, c, a+b+c);
-	printf ("%d*%d*%d=%.2f\n",a, b, c, (a+b+c)/3);
+	printf ("%d*%d*%d=%d\n",a, b, c, a*b*c);
 	return 0;
 }

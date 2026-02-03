@@ -10,4 +10,3 @@ int main( )
 	printf ("%d+%d+%d=%d\n",a, b, c, a+b+c);
 	return 0;
 }
-
