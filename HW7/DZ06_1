@@ -1,0 +1,15 @@
+#include <stdio.h>
+
+void reverse_string() {
+    int c = getchar();
+    if (c != '.' ) 
+    {
+        reverse_string();       
+        putchar(c);       
+    }
+}
+fh
+int main() {
+    reverse_string();
+    return 0;
+}
