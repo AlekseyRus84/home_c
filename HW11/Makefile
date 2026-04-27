@@ -11,4 +11,4 @@ temp_api.o: temp_api.c temp_api.h
 
 
 clean:
-	rm -f $(OBJS) $(TARGET)
+	del /f main.o temp_api.o prog.exe
