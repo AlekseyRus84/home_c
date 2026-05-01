@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdint.h>
+#include <ctype.h>
 #include <string.h>
 #include <windows.h>
 #include <time.h>
@@ -18,7 +19,6 @@ int main(int argc, char *argv[])
     struct tm *tm = localtime(&t);
     int month = tm->tm_mon + 1;
     int number = 0;
-    
     for (int i = 0; i < argc; i++)
     {
         // printf("argc = %d, argv = %s\n", i, argv[i]);
@@ -31,7 +31,8 @@ int main(int argc, char *argv[])
                 printf("-f входной файл csv для обработки. -m <номер месяца> \n");
                 break;
             case 'f':
-                char *rez = argv[i+1];
+                int r;
+                char *rez = argv[i + 1];
                 FILE *f = fopen(rez, "r");
                 if (f == NULL)
                 {
@@ -39,21 +40,39 @@ int main(int argc, char *argv[])
                     return 1;
                 }
 
-                while (fscanf(f, "%d,%d,%d,%d,%d,%d", &year, &month1, &day, &hour, &min, &t1) != EOF)
+                while ((r = fscanf(f, "%d;%d;%d;%d;%d;%d", 
+                    &year, &month1, &day, &hour, &min, &t1)) != EOF)
                 {
-                    info[number].year = year;
-                    info[number].month = month1;
-                    info[number].day = day;
-                    info[number].hour = hour;
-                    info[number].min = min;
-                    info[number].t = t1;
-                    number++;
+                    if (r < 6)
+                    {
+                        int c;
+                        while ((c = fgetc(f)) != '\n' && c != EOF);
+                        printf("Ошибка в линии %d\n", number);
+                        info[number].year = 0;
+                        info[number].month = 0;
+                        info[number].day = 0;
+                        info[number].hour = 0;
+                        info[number].min = 0;
+                        info[number].t = 0;
+                        number++;
+                        //continue;
+                    }
+                    else
+                    {
+                        info[number].year = year;
+                        info[number].month = month1;
+                        info[number].day = day;
+                        info[number].hour = hour;
+                        info[number].min = min;
+                        info[number].t = t1;
+                        number++;
+                    }
                 }
                 fclose(f);
                 break;
             case 'm':
-                char *ukazmonth = argv[i+1];
-                ukaz = atoi(ukazmonth); 
+                char *ukazmonth = argv[i + 1];
+                ukaz = atoi(ukazmonth);
             }
         }
     }
@@ -65,6 +84,7 @@ int main(int argc, char *argv[])
     }
     if (ukaz == 0)
     {
+        Printinfo(info, number);
         float mintec = MinTecTemp(info, number, month);
         printf("mintectemp=%g\n", mintec);
         float maxtec = MaxTecTemp(info, number, month);
@@ -79,8 +99,7 @@ int main(int argc, char *argv[])
     else
     {
         Printinfo(info, number);
-    } 
-
+    }
 
     return 0;
 }

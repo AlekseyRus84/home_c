@@ -29,7 +29,7 @@ void Printinfo(struct sensor info[], int number)
     for (int i = 0; i < number; i++)
     {
         if (ukaz > 0 && info[i].month != ukaz)
-            continue;  // ← пропускаем записи не того месяца
+            continue;  // пропускаем записи не того месяца
         printf("%04d-%02d-%02d-%02d-%02d t=%3d\n",info[i].year, info[i].month, info[i].day,info[i].hour, info[i].min, info[i].t);
     }
 };
