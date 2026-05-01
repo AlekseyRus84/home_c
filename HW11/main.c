@@ -4,7 +4,7 @@
 #include <string.h>
 #include <windows.h>
 #include <time.h>
-#include "temp_api.h"
+#include "temp_functions.h"
 #define SIZE 30
 
 int ukaz = 0; // переменнаz показывающая нужно ли показывать инфу только по текущему месяцу

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdint.h>
-#include "temp_api.h"
+#include "temp_functions.h"
 extern int ukaz;
 
 void AddRecord(struct sensor info[], int number, uint16_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t min, int8_t t)
